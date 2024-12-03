@@ -5,6 +5,8 @@ This project provides an API for predicting whether a tumor is benign (class = 2
 - [Description](#description)
 - [Requirements](#requirements)
 - [Getting Started](#getting-started)
+  - [1. Train and Save the Model](#1-train-and-save-the-model)
+  - [2. Deploy FastAPI](#2-deploy-fastapi)
 - [Endpoints](#endpoints)
 - [Example Input and Output](#example-input-and-output)
 - [File Structure](#file-structure)
@@ -12,7 +14,18 @@ This project provides an API for predicting whether a tumor is benign (class = 2
 
 ## Description
 
-The FastAPI application loads the trained Logistic Regression model and exposes an endpoint for predictions.
+The FastAPI application loads the trained Logistic Regression model and exposes an endpoint for predictions. The model is trained on the following features:
+
+- Clump Thickness
+- Uniformity of Cell Size
+- Uniformity of Cell Shape
+- Marginal Adhesion
+- Single Epithelial Cell Size
+- Bare Nuclei
+- Bland Chromatin
+- Normal Nucleoli
+- Mitoses
+
 
 ## Requirements
 To set up and run this project, you’ll need the following Python packages:
@@ -30,7 +43,14 @@ pip install -r requirements.txt
 ```
 
 ## Getting Started
-1. Ensure the `model.pkl` and `scaler.pkl` files are in the `model/` directory.
+1. Train and Save Model
+
+  Train the Logistic Regression model using Scikit-Learn and save the trained model and scaler to files for deployment:
+  ```bash
+  python logistic_regression_model.py
+  ```
+  This will create the `model.pkl` and `scaler.pkl` files in the `model/` directory.
+
 
 2. The FastAPI application (`api.py`) loads the saved model and provides an endpoint for predictions. Run it using `uvicorn`:
   ```bash
@@ -90,12 +110,15 @@ The project directory is structured as follows:
 
 ```
 📦 logistic_regression_classifier_api
+├─ data
+│  └─ data.csv
 ├─ model
 │  ├─ model.pkl
 │  └─ scaler.pkl
 ├─ src
 ├─ .gitignore
 ├─ api.py
+├─ logistic_regression_model.py
 ├─ README.md
 └─ requirements.txt
 ```
